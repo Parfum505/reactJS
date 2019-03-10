@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class DishDetail extends Component {
-    constructor(props) {
-        super(props);
-    }
     renderComments(commentsArray) {
-        if (commentsArray.length) {
+        if (commentsArray.length > 0) {
             const comments = commentsArray.map( comment => {
                 let date = new Date(comment.date).toLocaleDateString('en-US', {
                     day : '2-digit',
@@ -35,19 +32,21 @@ class DishDetail extends Component {
         }
     }
     renderDish(dish) {
-        if (dish !== null) {
+        if (dish) {
             return (
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        <Card>
-                            <CardImg width="100%" src={dish.image} alt={dish.name}/>
-                            <CardBody>
-                                <CardTitle className="font-weight-bold">{dish.name}</CardTitle>
-                                <CardText>{dish.description}</CardText>
-                            </CardBody>
-                        </Card>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-md-5 m-1">
+                            <Card>
+                                <CardImg width="100%" src={dish.image} alt={dish.name}/>
+                                <CardBody>
+                                    <CardTitle className="font-weight-bold">{dish.name}</CardTitle>
+                                    <CardText>{dish.description}</CardText>
+                                </CardBody>
+                            </Card>
+                        </div>
+                            {this.renderComments(dish.comments)}
                     </div>
-                        {this.renderComments(dish.comments)}
                 </div>
             );
         } else {
