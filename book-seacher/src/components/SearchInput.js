@@ -4,16 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 class SearchInput extends Component {
-    search () {
-        console.log('search');
+    changeSearch(event) {
+        this.props.change(event.target.value);
     }
     render() {
         return (
-            <Form>
+            <Form onSubmit={event=>event.preventDefault()}>
                 <Form.Group>
                     <InputGroup>
-                        <Form.Control type="text" placeholder="Type the book title here" />
-                        <InputGroup.Append onClick={() => this.search()}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Type the book title here"
+                            onChange={event=> this.changeSearch(event)}
+                            onKeyPress={event=> this.props.press(event)}
+                        />
+                        <InputGroup.Append onClick={() => this.props.search()}>
                             <InputGroup.Text>
                                 <FontAwesomeIcon icon={ faSearch } />
                             </InputGroup.Text>
