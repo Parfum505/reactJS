@@ -11,19 +11,31 @@ class App extends Component {
         this.search = this.search.bind(this);
         this.state = {
             query: '',
+            errors: '',
             items: []
         }
     }
     search () {
-        const url = 'https://www.googleapis.com/books/v1/volumes?q=';
+        this.setState({items: [], errors: ''});
+        const spinner = document.querySelector('.loader');
+        spinner.classList.add('active');
+        const url = 'https://www.googleapis.com/books/v1/volumes?maxResults=40&q=';
         fetch(`${url}${this.state.query}`, {method: "GET"})
             .then(respons=>respons.json())
             .then(result=>{
+                spinner.classList.remove('active');
                 let {items} = result;
-                this.setState({items});
-                console.log(this.state.items);
+                if (items) {
+                    this.setState({items});
+                } else {
+                    this.setState({
+                        errors: 'Can\'t find this book, try to change your request.'
+                    });
+
+                }
             })
-            .catch(error=>console.log(error));
+            .catch((error) => {
+            });
     }
     changeInput (val) {
         this.setState({query: val});
@@ -40,7 +52,8 @@ class App extends Component {
                 search={this.search}
                 press={this.keyPress}
             />
-            <Gallery items={this.state.items}/>
+            <span className="loader">&nbsp;</span>
+            <Gallery items={this.state.items} error={this.state.errors}/>
         </div>
     )
   }
