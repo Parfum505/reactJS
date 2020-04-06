@@ -46,7 +46,7 @@ class App extends Component {
   render() {
     return (
         <div className="bookSearcher">
-          <h1 className="mb-4">Book Searcher</h1>
+          <h1 className="mb-4 mt-4">Book Searcher</h1>
             <SearchInput
                 change={this.changeInput}
                 search={this.search}
