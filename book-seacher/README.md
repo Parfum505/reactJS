@@ -1,6 +1,6 @@
 # Book searcher
 
-![Book searcher](img/book_searcher.png "Book searcher")
+![Book searcher](build/img/book_searcher.png "Book searcher")
 
 #### Link to the demo [ Book searcher](https://parfum505.github.io/reactJS/book-seacher/ "Book searcher")
 ### How Book searcher works:
